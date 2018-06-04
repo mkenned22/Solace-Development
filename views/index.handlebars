@@ -1,1 +1,199 @@
-<h1>Hello World using Handlebars Hosted on Heroku!</h1>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+      <div class="container">
+        <a class="navbar-brand js-scroll-trigger" href="#page-top">SMURPH</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#about">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#getStarted">Get Started</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#configureRouter">Configure Router</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#contact">Contact</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <header class="masthead text-center text-white d-flex">
+      <div class="container my-auto">
+        <div class="row">
+          <div class="col-lg-10 mx-auto">
+            <h1 class="text-uppercase">
+              <strong>SMURPH</strong>
+            </h1>
+            <h3>Solace Messaging Using a Raspberyy Pi in your Home</h3>
+            <hr>
+          </div>
+          <div class="col-lg-8 mx-auto">
+            <p class="text-faded mb-5">Do you want to use Solace to communicate with IoT devices in your home, but do not know where to begin?</p>
+            <a class="btn btn-primary btn-xl js-scroll-trigger" href="#about">Let's Begin!</a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <section class="bg-primary" id="about">
+        <div class="container">
+          <div class="col-md-8 mx-auto text-center">
+            <h2 class="section-heading text-white">What is Solace?</h2>
+            <hr class="light my-4">
+            <p class="text-faded mb-4">Solace is a middleware company that enables event-driven communications between devices and applications running in clouds and datacenters using open APIs and protocols via their unified message broker supporting publish/subscribe, queuing, request/reply and streaming across hybrid cloud environments.</p>
+            <h2 class="section-heading text-white">What is the Internet of Things (IoT)?</h2>
+            <hr class="light my-4">
+            <p class="text-faded mb-4">The Internet of Things (IoT) is the network of physical devixes, vehicles, home appliances and other items embedded with electronics, software, sensors, actuators, and connectivity which enables these objects to connect and exchange data.</p>
+            <br>
+            <a class="btn btn-light btn-xl js-scroll-trigger" href="#getStarted">Get Started</a>
+          </div>
+        </div>
+    </section>
+
+    <section id="getStarted">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 text-center">
+            <h2 class="section-heading">How do I get started?</h2>
+            <hr class="my-4">
+          </div>
+        </div>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-3 col-md-6 text-center">
+            <div class="service-box mt-5 mx-auto">
+              <i class="fa fa-4x fa-cloud text-primary mb-3 sr-icons"></i>
+              <h3 class="mb-3">1. Solace Cloud</h3>
+              <p class="text-muted mb-0">Get started with Solace Cloud today. It's free!</p>
+              <br>
+              <a target="_blank" class="btn btn-primary sr-button" href="https://cloud.solace.com/signup/">Sign Up</a>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 text-center">
+            <div class="service-box mt-5 mx-auto">
+              <i class="fa fa-4x fa-desktop text-primary mb-3 sr-icons"></i>
+              <h3 class="mb-3">2. Raspberry Pi</h3>
+              <p class="text-muted mb-0">Buy and configure a Raspberry Pi</p>
+              <br>
+              <a target="_blank" class="btn btn-primary sr-button" href="https://www.amazon.com/CanaKit-Raspberry-Complete-Starter-Premium/dp/B07BLRSKBV/ref=sr_1_8?ie=UTF8&qid=1527957460&sr=8-8&keywords=canakit+raspberry+pi+3+b%2B">Buy</a>
+              <a target="_blank" class="btn btn-primary sr-button" href="https://www.w3schools.com/nodejs/nodejs_raspberrypi.asp">Configure</a>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 text-center">
+            <div class="service-box mt-5 mx-auto">
+              <a href="#auto-provisioning"><i class="fa fa-4x fa-pencil-square-o text-primary mb-3 sr-icons"></i></a>
+              <h3 class="mb-3">3. Message Router</h3>
+              <p class="text-muted mb-0">Use our self-service configuration tool.</p>
+              <br>
+              <a class="btn btn-primary sr-button js-scroll-trigger" href="#configureRouter">Setup</a>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 text-center">
+            <div class="service-box mt-5 mx-auto">
+              <i class="fa fa-4x fa-thumbs-o-up text-primary mb-3 sr-icons"></i>
+              <h3 class="mb-3">4. Try it out!</h3>
+              <p class="text-muted mb-0">Clone the repo and start talking to your home today.</p>
+              <br>
+              <a target="_blank" class="btn btn-primary sr-button" href="https://github.com/mkenned22/Solace-Development">GIT</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-dark text-white">
+      <div class="container">
+        <div class="row" id="configureRouter">
+          <div class="col-md-6">
+        <br>
+        <h2 class="mb-4">Set up your Solace Message Router</h2>
+        <h6 class="mb-4">Fill in the form below to quickly configure your Solace router</h6>
+
+          <form id="contact-form" method="post" action="/" role="form">
+
+    <div class="messages"></div>
+
+    <div class="controls">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="form_msgVpn">Message VPN *</label>
+                    <input id="form_msgVpn" type="text" name="msgVpn" class="form-control" placeholder="Message VPN *" required="required" data-error="Message VPN is required.">
+                    <div class="help-block with-errors"></div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="form_username">Username *</label>
+                    <input id="form_username" type="text" name="username" class="form-control" placeholder="SEMP Username *" required="required" data-error="SEMP username is required.">
+                    <div class="help-block with-errors"></div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="form_password">Password *</label>
+                    <input id="form_password" type="text" name="password" class="form-control" placeholder="Password *" required="required" data-error="SEMP password is required.">
+                    <div class="help-block with-errors"></div>
+                </div
+            ></div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="form_app">App Name *</label>
+                    <input id="form_app" type="text" name="app" class="form-control" placeholder="Application *" required="required" data-error="Application name is required">
+                    <div class="help-block with-errors"></div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="form_description">Description *</label>
+                    <input id="form_description" type="text" name="desc" class="form-control" placeholder="Description *" required="required" data-error="Application description is required.">
+                    <div class="help-block with-errors"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+                <input type="submit" class="btn btn-success btn-send" value="Submit">
+            </div>
+</form>
+        </div>
+        <div class="col-md-6">
+            <br>
+          {{result}}
+        </div>
+      </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 mx-auto text-center">
+            <h2 class="section-heading">Let's Get In Touch!</h2>
+            <hr class="my-4">
+            <p class="mb-5">Ready to start your next project with us? That's great! Give us a call or send us an email and we will get back to you as soon as possible!</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-4 ml-auto text-center">
+            <i class="fa fa-phone fa-3x mb-3 sr-contact"></i>
+            <p>123-456-6789</p>
+          </div>
+          <div class="col-lg-4 mr-auto text-center">
+            <i class="fa fa-envelope-o fa-3x mb-3 sr-contact"></i>
+            <p>
+              <a href="mailto:your-email@your-domain.com">feedback@startbootstrap.com</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
