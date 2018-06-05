@@ -18,8 +18,8 @@ router.post("/", function(req, res){
     var api = "mr-91b69336gh.messaging.solace.cloud:20270/SEMP/v2/config";
     var pubacl = app+"_"+desc+"_pub_acl";
     var subacl = app+"_"+desc+"_sub_acl";
-    var pubcu = app+"_"+desc+"pub_cu";
-    var subcu = app+"_"+desc+"sub_cu";
+    var pubcu = app+"_"+desc+"_pub_cu";
+    var subcu = app+"_"+desc+"_sub_cu";
 
     //for cloud, message VPN is already cready
     // only need to create acl, cp, and cu
@@ -79,7 +79,7 @@ router.post("/", function(req, res){
         });
     });
     
-    res.render("index",{result:"You have successfully created everything"});
+    res.render("index",{result:"Success!"});
 
 });
 
