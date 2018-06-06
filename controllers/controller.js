@@ -78,9 +78,18 @@ router.post("/", function(req, res){
             console.log(body); 
         });
     });
-    
-    res.render("index",{result:"Success!"});
 
+    var hbsObject = {
+        data:{
+            "subscriber":sub_cu_params.json.clientUsername,
+            "subPassword":sub_cu_params.json.password,
+            "publisher":pub_cu_params.json.clientUsername,
+            "pubPassword":pub_cu_params.json.password
+        } 
+    }
+    console.log(hbsObject);
+
+    res.render("success",hbsObject);
 });
 
 module.exports = router;

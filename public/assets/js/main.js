@@ -11,13 +11,8 @@ $("#submitButton").on("click", function(event) {
     };
 
     // Send the POST request.
-    $.ajax("/", {
-      type: "POST",
-      data: formData
-    }).then(
-      function() {
-        console.log("request being made");
-        // Reload the page to get the updated list
+    $.post("/", formData, function(data) {
+        console.log(data);
       }
     );
   });
