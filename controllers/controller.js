@@ -1,5 +1,6 @@
 var express = require("express");
 var request = require("request");
+var solace = require("../models/solace.js")
 
 var router = express.Router();
 
@@ -65,19 +66,23 @@ router.post("/configure", function(req, res){
             "password":"subscribe"
         }
     };
-    request(pub_acl_params,function(error,res,body){
-      console.log(body); 
-      request(pub_cu_params,function(error,res,body){
-        console.log(body); 
-     });
-    });
+    // request(pub_acl_params,function(error,res,body){
+    //   console.log(body); 
+    //   request(pub_cu_params,function(error,res,body){
+    //     console.log(body); 
+    //  });
+    // });
     
-    request(sub_acl_params,function(error,res,body){
-        console.log(body); 
-        request(sub_cu_params,function(error,res,body){
-            console.log(body); 
-        });
-    });
+    // request(sub_acl_params,function(error,res,body){
+    //     console.log(body); 
+    //     request(sub_cu_params,function(error,res,body){
+    //         console.log(body); 
+    //     });
+    // });
+
+    solace.createAclProfile(req.body.username,req.body.password,req.body.msgVpn,req.body.app,req.body.desc,"pub",function(result){
+        res.render("success",hbsObject);
+    })
 
     var hbsObject = {
         data:{
@@ -89,7 +94,7 @@ router.post("/configure", function(req, res){
     }
     console.log(hbsObject);
 
-    res.render("success",hbsObject);
+    //res.render("success",hbsObject);
 });
 
 module.exports = router;
