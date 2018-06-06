@@ -9,7 +9,7 @@ router.get("/", function(req, res){
 });
 
 // POSTS
-router.post("/", function(req, res){
+router.post("/configure", function(req, res){
     var msgVpn = req.body.msgVpn;
     var username = req.body.username;
     var password = req.body.password;

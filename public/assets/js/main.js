@@ -11,7 +11,7 @@ $("#submitButton").on("click", function(event) {
     };
 
     // Send the POST request.
-    $.post("/", formData, function(data) {
+    $.post("/configure", formData, function(data) {
         console.log(data);
       }
     );
