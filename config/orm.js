@@ -1,5 +1,5 @@
 var request = require("request");
-var api = "mr-91b69336gh.messaging.solace.cloud:20270/SEMP/v2/config";
+var api = "vmr-mrukojm0fl.messaging.solace.cloud:21230/SEMP/v2/config";
 var orm = {
     
     createAclProfile: function(user,pass,vpn,app,desc,type,cb){
