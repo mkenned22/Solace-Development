@@ -23,7 +23,6 @@
         </div>
     </div>
 </nav>
-<header></header>
 
 <section id="success" class="bg-dark text-white">
     <div class="container">
@@ -38,8 +37,74 @@
                 <p class="mb-5">Publisher Username: {{publisher}}</p>
                 <p class="mb-5">Publisher Password: {{pubPassword}}</p>
                 {{/with}}
-                
-                <p class="mb-5"></p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="tryItOut" class="bg-dark text-white">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center">
+                <h2 class="section-heading"><h2>Try it out!</h2>
+                <hr class="my-4">
+                <p class="mb-5">Step 1: Setup the listener on your Raspberry Pi</p>
+                <p class="mb-5">Run TopicSubscriber.js</p>
+                <br>
+                <p class="mb-5">Step 2: Setup the publish a message</p>
+                <p class="mb-5">Run TopicSubscriber.js</p>
+
+                <form id="contact-form" method="post" action="/configure#tryItOut" role="form">
+
+                    <div class="controls">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="form_msgVpn">Message VPN *</label>
+                                    <input id="form_msgVpn" type="text" name="msgVpn" class="form-control" placeholder="Message VPN *" required="required" data-error="Message VPN is required.">
+                                    <div class="help-block with-errors"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="form_username">Username *</label>
+                                    <input id="form_username" type="text" name="username" class="form-control" placeholder="SEMP Username *" required="required"
+                                        data-error="SEMP username is required.">
+                                    <div class="help-block with-errors"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="form_password">Password *</label>
+                                    <input id="form_password" type="text" name="password" class="form-control" placeholder="Password *" required="required" data-error="SEMP password is required.">
+                                    <div class="help-block with-errors"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="form_app">App Name *</label>
+                                    <input id="form_app" type="text" name="app" class="form-control" placeholder="Application *" required="required" data-error="Application name is required">
+                                    <div class="help-block with-errors"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="form_description">Description *</label>
+                                    <input id="form_description" type="text" name="desc" class="form-control" placeholder="Description *" required="required"
+                                        data-error="Application description is required.">
+                                    <div class="help-block with-errors"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <br>
+                            <input id="submitButton" type="submit" class="btn btn-primary btn-xl mx-auto" value="Submit">
+                        </div>
+                    </div>
+                </form>
+
             </div>
         </div>
     </div>

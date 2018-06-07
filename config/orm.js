@@ -23,11 +23,34 @@ var orm = {
             if(error){
                 throw error
             }
-            cb(res.statusCode); 
+            cb(res); 
         });
     },
-    createClientUsername: function(){
+    createClientUsername: function(user,pass,vpn,app,desc,type,cb){
+        var params = {
+            uri: "https://"+user+":"+pass+"@"+api+"/msgVpns/"+vpn+"/clientUsernames",
+            method: 'POST',
+            json: {
+                "clientUsername":app+"_"+desc+"_"+type+"_cu",
+                "aclProfileName":app+"_"+desc+"_"+type+"_acl",
+                "clientProfileName":"default",
+                "enabled":true,
+            }
+        };
 
+        if(type="pub"){
+            params.json.password = "publish";
+        }
+        else if(type="sub"){
+            params.json.password = "subscribe";
+        }
+
+        request(params,function(error,res,body){
+            if(error){
+                throw error
+            }
+            cb(res); 
+        });
     }
 }
 
