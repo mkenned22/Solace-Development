@@ -1,5 +1,6 @@
 var express = require("express");
 var solace = require("../models/solace.js")
+var database = require("../models/database.js")
 
 var router = express.Router();
 
@@ -9,45 +10,43 @@ router.get("/", function(req, res){
 });
 
 // POSTS
-router.post("/configure", function(req, res){
+router.post("/", function(req, res){
 
-    var hbsObject = {
+    var user = req.body.username;
+    var pass = req.body.password;
+    var vpn = req.body.msgVpn;
+    var app = req.body.app;
+    var desc = req.body.desc;
+
+    var successObject = {
         data:{
-            "subscriber":req.body.app+"_"+req.body.desc+"_sub_cu",
+
+            "subscriber":app+"_"+desc+"_sub_cu",
             "subPassword":"subscribe",
-            "publisher":req.body.app+"_"+req.body.desc+"_pub_cu",
+            "publisher":app+"_"+desc+"_pub_cu",
             "pubPassword":"publish"
         } 
     }
 
-    solace.createAclProfile(req.body.username,req.body.password,req.body.msgVpn,req.body.app,req.body.desc,"pub",function(result){
+    var hbsObject = {
+        data:{
+            "subscriber":app+"_"+desc+"_sub_cu",
+            "subPassword":"subscribe",
+            "publisher":app+"_"+desc+"_pub_cu",
+            "pubPassword":"publish"
+        } 
+    }
+
+    solace.configureMessageVpn(user,pass,vpn,app,desc,function(result){
         if(result.body.meta.responseCode === 200){
-            solace.createAclProfile(req.body.username,req.body.password,req.body.msgVpn,req.body.app,req.body.desc,"sub",function(result){
-                if(result.body.meta.responseCode === 200){
-                    solace.createClientUsername(req.body.username,req.body.password,req.body.msgVpn,req.body.app,req.body.desc,"pub",function(result){
-                        if(result.body.meta.responseCode === 200){
-                            solace.createClientUsername(req.body.username,req.body.password,req.body.msgVpn,req.body.app,req.body.desc,"sub",function(result){
-                                if(result.body.meta.responseCode === 200){
-                                    res.render("success",hbsObject);
-                                }
-                                else{
-                                    res.render("failure");
-                                }
-                            });
-                        }
-                        else{
-                            res.render("failure");
-                        }
-                    });
-                }
-                else{
-                    res.render("failure");
-                }
+            res.render("index",hbsObject);
+            database.insertOne(vpn,app,desc,function(result){
+                console.log(result)
             });
         }
         else{
             res.render("failure");
-        }
+        }     
     });
 
 });

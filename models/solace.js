@@ -1,17 +1,31 @@
 var orm = require("../config/orm.js");
 
 var solace = {
-    createAclProfile: function(user,pass,vpn,app,desc,type,cb){
-        orm.createAclProfile(user,pass,vpn,app,desc,type,function(res){
-            console.log("Request: Create ACL Profile --> " + app+"_"+desc+"_"+type+"_acl; Status Code: " + res.body.meta.responseCode);
-            cb(res);
-        })
-    },
-    createClientUsername: function(user,pass,vpn,app,desc,type,cb){
-        orm.createClientUsername(user,pass,vpn,app,desc,type,function(res){
-            console.log("Request: Create Client Username --> " + app+"_"+desc+"_"+type+"_acl; Status Code: " + res.body.meta.responseCode);
-            cb(res);
-        })
+    configureMessageVpn: function(user,pass,vpn,app,desc,cb){
+        orm.createAclProfile(user,pass,vpn,app,desc,"pub",function(result){
+            if(result.body.meta.responseCode === 200){
+                orm.createAclProfile(user,pass,vpn,app,desc,"sub",function(result){
+                    if(result.body.meta.responseCode === 200){
+                        orm.createClientUsername(user,pass,vpn,app,desc,"pub",function(result){
+                            if(result.body.meta.responseCode === 200){
+                                orm.createClientUsername(user,pass,vpn,app,desc,"sub",function(result){
+                                    cb(result);
+                                });
+                            }
+                            else{
+                                cb(result);
+                            }
+                        });
+                    }
+                    else{
+                        cb(result);
+                    }
+                });
+            }
+            else{
+                cb(result);
+            }
+        });
     }
 }
 module.exports = solace;

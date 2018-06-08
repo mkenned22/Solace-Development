@@ -116,15 +116,15 @@
     </div>
 </section>
 
-<section class="bg-dark text-white">
+<section class="bg-dark text-white" id="configureRouter">
     <div class="container">
-        <div class="row" id="configureRouter">
+        <div class="row">
             <div class="col-md-6">
                 <br>
                 <h2 class="mb-4">Set up your Solace Message Router</h2>
                 <h6 class="mb-4">Fill in the form below to quickly configure your Solace router</h6>
 
-                <form id="contact-form" method="post" action="/configure" role="form">
+                <form id="contact-form" method="post" action="/#configureRouter" role="form">
 
                     <div class="controls">
                         <div class="row">
@@ -178,6 +178,12 @@
             <div class="col-md-6">
                 <br> 
                 <div id="apiResponseMessage"></div>
+                {{#with data}}
+                <p class="mb-5">Subscriber Username: {{subscriber}}</p>
+                <p class="mb-5">Subscriber Password: {{subPassword}}</p>
+                <p class="mb-5">Publisher Username: {{publisher}}</p>
+                <p class="mb-5">Publisher Password: {{pubPassword}}</p>
+                {{/with}}
             </div>
         </div>
     </div>
