@@ -2,48 +2,56 @@
 <html lang="en">
 
 <head>
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-120506350-1"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'UA-120506350-1');
-</script>
-    <meta charset="UTF-8">
+    {{!-- Page Title --}}
+    <title>SMURPH</title>
+    {{!-- Tab Icon --}}
+    <link rel="icon" href="/assets/imgs/favicon.png">
+    {{!-- Set Character Encoding --}}
+    <meta charset="UTF-8"> 
+    {{!-- Setting Viewport Parameters --}}
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
+    {{!-- Global site tag (gtag.js) - Google Analytics --}}
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-120506350-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'UA-120506350-1');
+    </script>
+    {{!-- /GoogleAnalytics --}}
+
+    {{!-- Bootstrap CSS --}}
+    <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"> 
+    
+    {{!-- Custom CSS --}}
+    <link href="/assets/css/creative.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/assets/css/style.css" type="text/css" />
-    <title>SMURPH</title>
 
-    <!-- Bootstrap core CSS -->
-    <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom fonts for this template -->
+    {{!-- Font Awesome --}}
     <script src="https://use.fontawesome.com/d3fabd3f64.js"></script>
 
+    {{!-- Google Fonts --}}
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800'
         rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic'
         rel='stylesheet' type='text/css'>
-
-    <!-- Custom styles for this template -->
-    <link href="/assets/css/creative.min.css" rel="stylesheet">
 </head>
 
 <body id="page-top">
+    {{!-- body = index.handlebars --}}
+    {{{body}}}
 
-    {{{body}}} {{!-- References to JavaScript files --}}
-    <!-- Bootstrap core JavaScript -->
+    {{!-- JavaScript --}}
+    {{!-- JQuery --}}
     <script src="/vendor/jquery/jquery.min.js"></script>
-    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- Plugin JavaScript -->
+    {{!-- JQuery Easing --}}
     <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
-    <!-- Custom scripts for this template -->
+    {{!-- Bootstrap --}}
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    {{!-- Custom --}}
     <script src="/assets/js/creative.min.js"></script>
-
 </body>
 
 </html>
