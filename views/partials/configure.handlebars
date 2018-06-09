@@ -1,23 +1,39 @@
 <section class="bg-dark text-white" id="configureRouter">
     <div class="container">
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-12 text-center">
                 <br>
                 <h2 class="mb-4">Set up your Solace Message Router</h2>
                 <h6 class="mb-4">Fill in the form below to quickly configure your Solace router</h6>
+            </div>
+            <div class="col-md-4">
 
+            </div>
+            <div class="col-md-4">
                 <form id="contact-form" method="post" action="/#configureRouter" role="form">
 
                     <div class="controls">
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="form_api">SEMP API URL *</label>
+                                    <input id="form_api" type="text" name="api" class="form-control" placeholder="SEMP API URL *" required="required"
+                                        data-error="Solace SEMP API is required.">
+                                    <div class="help-block with-errors"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="form_msgVpn">Message VPN *</label>
                                     <input id="form_msgVpn" type="text" name="msgVpn" class="form-control" placeholder="Message VPN *" required="required" data-error="Message VPN is required.">
                                     <div class="help-block with-errors"></div>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="form_username">Username *</label>
                                     <input id="form_username" type="text" name="username" class="form-control" placeholder="SEMP Username *" required="required"
@@ -25,7 +41,9 @@
                                     <div class="help-block with-errors"></div>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="form_password">Password *</label>
                                     <input id="form_password" type="text" name="password" class="form-control" placeholder="Password *" required="required" data-error="SEMP password is required.">
@@ -34,18 +52,10 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="form_app">App Name *</label>
-                                    <input id="form_app" type="text" name="app" class="form-control" placeholder="Application *" required="required" data-error="Application name is required">
-                                    <div class="help-block with-errors"></div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="form_description">Description *</label>
-                                    <input id="form_description" type="text" name="desc" class="form-control" placeholder="Description *" required="required"
-                                        data-error="Application description is required.">
+                                    <input id="form_app" type="text" name="app" class="form-control mx-auto" placeholder="Application *" required="required" data-error="Application name is required">
                                     <div class="help-block with-errors"></div>
                                 </div>
                             </div>
@@ -56,16 +66,10 @@
                         </div>
                     </div>
                 </form>
+                </div>
+                <div class="col-md-4">
+
             </div>
-            <div class="col-md-6">
-                <br> 
-                <div id="apiResponseMessage"></div>
-                {{#with data}}
-                <p class="mb-5">Subscriber Username: {{subscriber}}</p>
-                <p class="mb-5">Subscriber Password: {{subPassword}}</p>
-                <p class="mb-5">Publisher Username: {{publisher}}</p>
-                <p class="mb-5">Publisher Password: {{pubPassword}}</p>
-                {{/with}}
             </div>
         </div>
     </div>

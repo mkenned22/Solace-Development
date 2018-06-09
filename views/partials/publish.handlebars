@@ -2,12 +2,41 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8 mx-auto text-center">
-                <h2 class="section-heading">Try it out!</h2>
+                <h2 class="section-heading">Congratulations!</h2>
+                <h5>You have sucessfully configured your Solace Cloud message router!</h5>
                 <hr class="my-4">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <h4>Publisher</h4>
+                <p><b>Client Username:</b> {{publisher}}</p>
+                <p><b>Password:</b> {{pubPassword}}</p>
+                <br>
+                <h4>Subscriber</h4>
+                <p><b>Client Username:</b> {{subscriber}}</p>
+                <p><b>Password:</b> {{subPassword}}</p>
+                <br>
+                <h4>Message VPN</h4>
+                <p>{{vpn}}</p>
+                <br>
+                <h4>Example Publish Request using Curl</h4>
+                <p>curl -X POST -d "Hello World" http://HOST:PORT/T/rest/pubsub -H "content-type: text" -H "Solace-delivery-mode: direct" --user restUsers:restPassword</p>
+            </div>
+            <div class="col-md-6">
                 <form id="publish-form" method="post" action="/test" role="form">
                     <div class="controls">
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="form_api">WSS API URL *</label>
+                                    <input id="form_api" type="text" name="api" class="form-control" placeholder="Message VPN *" required="required" data-error="Message VPN is required.">
+                                    <div class="help-block with-errors"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="form_msgVpn">Message VPN *</label>
                                     <input id="form_msgVpn" type="text" name="msgVpn" class="form-control" placeholder="Message VPN *" required="required" data-error="Message VPN is required.">
@@ -16,7 +45,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="form_username">Publisher Username *</label>
                                     <input id="form_username" type="text" name="username" class="form-control" placeholder="SEMP Username *" required="required"
@@ -26,7 +55,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="form_password">Publisher Password *</label>
                                     <input id="form_password" type="text" name="password" class="form-control" placeholder="Password *" required="required" data-error="SEMP password is required.">
@@ -35,20 +64,33 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="form_app">Message</label>
-                                    <textarea id="form_app" type="text" name="app" class="form-control" placeholder="Application *" required="required" data-error="Application name is required"></textarea>
+                                    <label for="form_topic">Topic</label>
+                                    <input id="form_topic" type="text" name="topic" class="form-control" placeholder="Application *" required="required" data-error="Application name is required">
+                                    <div class="help-block with-errors"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="form_message">Message</label>
+                                    <textarea id="form_message" type="text" name="message" class="form-control" placeholder="Application *" required="required" data-error="Application name is required"></textarea>
                                     <div class="help-block with-errors"></div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-12">
                             <br>
-                            <input id="PublishButton" type="submit" class="btn btn-primary btn-xl mx-auto" value="Publish Message">
+                            <input id="publishButton" type="submit" class="btn btn-primary btn-xl mx-auto" value="Publish Message">
                         </div>
                     </div>
                 </form>
+            </div>
+        </div>
+                
+                
             </div>
         </div>
     </div>

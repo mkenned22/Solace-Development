@@ -2,20 +2,17 @@
 var request = require("request");
 var connection = require("./connection.js");
 
-// define the SEMP API URL
-var api = "vmr-mrukojm0fl.messaging.solace.cloud:21230/SEMP/v2/config";
-
 // define the orm object
 var orm = {
     // SOLACE FUNCTIONS
     // create an ACL profile
-    createAclProfile: function(user,pass,vpn,app,desc,type,cb){
+    createAclProfile: function(user,pass,vpn,app,api,type,cb){
         // POST params
         var params = {
             uri: "https://"+user+":"+pass+"@"+api+"/msgVpns/"+vpn+"/aclProfiles",
             method: 'POST',
             json: { 
-                "aclProfileName":app+"_"+desc+"_"+type+"_acl",
+                "aclProfileName":app+"_"+type+"_acl",
                 "clientConnectDefaultAction":"allow",
                 "subscribeTopicDefaultAction":"allow",
                 "publishTopicDefaultAction":"allow"
@@ -31,14 +28,14 @@ var orm = {
     },
 
     // create a client username
-    createClientUsername: function(user,pass,vpn,app,desc,type,cb){
+    createClientUsername: function(user,pass,vpn,app,api,type,cb){
         // POST params
         var params = {
             uri: "https://"+user+":"+pass+"@"+api+"/msgVpns/"+vpn+"/clientUsernames",
             method: 'POST',
             json: {
-                "clientUsername":app+"_"+desc+"_"+type+"_cu",
-                "aclProfileName":app+"_"+desc+"_"+type+"_acl",
+                "clientUsername":app+"_"+type+"_cu",
+                "aclProfileName":app+"_"+type+"_acl",
                 "clientProfileName":"default",
                 "enabled":true,
                 "password":type+'_password'
@@ -67,8 +64,8 @@ var orm = {
         });
     },
     // insert a new entry into the database
-    insertOne: function(vpn, app, desc, cb){
-        query = 'insert into request_log (msgvpn,app,description) values ("'+vpn+'","'+app+'","'+desc+'")' + ';';
+    insertOne: function(vpn, app, cb){
+        query = 'insert into request_log (msgvpn,app) values ("'+vpn+'","'+app+'")' + ';';
         connection.query(query, function(error, result){
             if(error){
                 orm.log(error);

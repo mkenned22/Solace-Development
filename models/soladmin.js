@@ -6,28 +6,28 @@ var orm = require("../config/orm.js");
 var soladmin = {
 
     // configure the message router via several POST requests to the SEMP solace API
-    configureMessageVpn: function (user, pass, vpn, app, desc, cb) {
+    configureMessageVpn: function (user, pass, vpn, app, api, cb) {
 
         // Request #1: Create the ACL profile for publishing
-        orm.createAclProfile(user, pass, vpn, app, desc, "pub", function (result) {
+        orm.createAclProfile(user, pass, vpn, app, api, "pub", function (result) {
 
             // If request #1 returns a 200, then...
             if (result.body.meta.responseCode === 200) {
 
                 // Request #2: Create the ACL profile for subscribing
-                orm.createAclProfile(user, pass, vpn, app, desc, "sub", function (result) {
+                orm.createAclProfile(user, pass, vpn, app, api, "sub", function (result) {
 
                     // If request #2 returns a 200, then...
                     if (result.body.meta.responseCode === 200) {
 
                         // Request #3: Create the client profile for the publisher
-                        orm.createClientUsername(user, pass, vpn, app, desc, "pub", function (result) {
+                        orm.createClientUsername(user, pass, vpn, app, api, "pub", function (result) {
 
                             // If request #3 returns a 200, then...
                             if (result.body.meta.responseCode === 200) {
 
                                 // Request #4: Create the client profile for the subscriber
-                                orm.createClientUsername(user, pass, vpn, app, desc, "sub", function (result) {
+                                orm.createClientUsername(user, pass, vpn, app, api, "sub", function (result) {
                                     // return the result back to the controller either way, as this is the final post request
                                     cb(result);
                                 });
@@ -52,7 +52,7 @@ var soladmin = {
     },
 
     // publish a message
-    publishMessage: function () {
+    publishMessage: function (api,vpn,user,pass,topic,msg,cb) {
 
         // require the Solace Node Module
         var solace = require('solclientjs').debug; // logging supported
@@ -69,7 +69,7 @@ var soladmin = {
         // define the publisher, session, and the topic name (taken from form)
         var publisher = {};
         publisher.session = null;
-        publisher.topicName = "topic";
+        publisher.topicName = topic;
 
         orm.log('\n*** Publisher to topic "' + publisher.topicName + '" is ready to connect ***');
 
@@ -139,7 +139,7 @@ var soladmin = {
         // Publishes one message
         publisher.publish = function () {
             if (publisher.session !== null) {
-                var messageText = 'Sample Message';
+                var messageText = msg;
                 var message = solace.SolclientFactory.createMessage();
                 message.setDestination(solace.SolclientFactory.createTopicDestination(publisher.topicName));
                 message.setBinaryAttachment(messageText);
@@ -180,9 +180,9 @@ var soladmin = {
         var args = [
             '',
             '',
-            'wss://vmr-mrukojm0fl.messaging.solace.cloud:21220',
-            'mike_123_sub_cu@msgvpn-8mqb12lrgh',
-            'password']
+            api,
+            user+"@"+vpn,
+            pass]
 
         publisher.run(args);
 
