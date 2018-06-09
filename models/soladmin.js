@@ -1,35 +1,60 @@
+// require request and the ORM (object relational mapping)
 var request = require("request");
 var orm = require("../config/orm.js");
 
+// define soladmin, which contains functions to configure the message router and publish messages
 var soladmin = {
+
+    // configure the message router via several POST requests to the SEMP solace API
     configureMessageVpn: function(user,pass,vpn,app,desc,cb){
+
+        // Request #1: Create the ACL profile for publishing
         orm.createAclProfile(user,pass,vpn,app,desc,"pub",function(result){
+
+            // If request #1 returns a 200, then...
             if(result.body.meta.responseCode === 200){
+
+                // Request #2: Create the ACL profile for subscribing
                 orm.createAclProfile(user,pass,vpn,app,desc,"sub",function(result){
+
+                    // If request #2 returns a 200, then...
                     if(result.body.meta.responseCode === 200){
+
+                        // Request #3: Create the client profile for the publisher
                         orm.createClientUsername(user,pass,vpn,app,desc,"pub",function(result){
+
+                            // If request #3 returns a 200, then...
                             if(result.body.meta.responseCode === 200){
+
+                                // Request #4: Create the client profile for the subscriber
                                 orm.createClientUsername(user,pass,vpn,app,desc,"sub",function(result){
+                                    // return the result back to the controller either way, as this is the final post request
                                     cb(result);
                                 });
                             }
                             else{
+                                // If not 200, return the result to the controller
                                 cb(result);
                             }
                         });
                     }
                     else{
+                        // If not 200, return the result to the controller
                         cb(result);
                     }
                 });
             }
             else{
+                // If not 200, return the result to the controller
                 cb(result);
             }
         });
     },
+
+    // publish a message
     publishMessage: function(){
 
+        // require the Solace Node Module
         var solace = require('solclientjs').debug; // logging supported
 
         // Initialize factory with the most recent API defaults
@@ -41,20 +66,12 @@ var soladmin = {
         // NOTICE: works only with ('solclientjs').debug
         solace.SolclientFactory.setLogLevel(solace.LogLevel.WARN);
         
+        // define the publisher, session, and the topic name (taken from form)
         var publisher = {};
         publisher.session = null;
-        publisher.topicName = "tutorial/topic";
+        publisher.topicName = "topic";
         
-        // Logger
-        publisher.log = function (line) {
-            var now = new Date();
-            var time = [('0' + now.getHours()).slice(-2), ('0' + now.getMinutes()).slice(-2),
-                ('0' + now.getSeconds()).slice(-2)];
-            var timestamp = '[' + time.join(':') + '] ';
-            console.log(timestamp + line);
-        };
-        
-        publisher.log('\n*** Publisher to topic "' + publisher.topicName + '" is ready to connect ***');
+        orm.log('\n*** Publisher to topic "' + publisher.topicName + '" is ready to connect ***');
         
         // main function
         publisher.run = function (argv) {
@@ -64,23 +81,23 @@ var soladmin = {
             // Establishes connection to Solace message router
             publisher.connect = function (argv) {
                 if (publisher.session !== null) {
-                    publisher.log('Already connected and ready to publish.');
+                    orm.log('Already connected and ready to publish.');
                     return;
                 }
                 // extract params
                 if (argv.length < (2 + 3)) { // expecting 3 real arguments
-                    publisher.log('Cannot connect: expecting all arguments' +
+                    orm.log('Cannot connect: expecting all arguments' +
                         ' <protocol://host[:port]> <client-username>@<message-vpn> <client-password>.\n' +
                         'Available protocols are ws://, wss://, http://, https://');
                     process.exit();
                 }
                 var hosturl = argv.slice(2)[0];
-                publisher.log('Connecting to Solace message router using url: ' + hosturl);
+                orm.log('Connecting to Solace message router using url: ' + hosturl);
                 var usernamevpn = argv.slice(3)[0];
                 var username = usernamevpn.split('@')[0];
-                publisher.log('Client username: ' + username);
+                orm.log('Client username: ' + username);
                 var vpn = usernamevpn.split('@')[1];
-                publisher.log('Solace message router VPN name: ' + vpn);
+                orm.log('Solace message router VPN name: ' + vpn);
                 var pass = argv.slice(4)[0];
                 // create session
                 try {
@@ -92,20 +109,20 @@ var soladmin = {
                         password: pass,
                     });
                 } catch (error) {
-                    publisher.log(error.toString());
+                    orm.log(error.toString());
                 }
                 // define session event listeners
                 publisher.session.on(solace.SessionEventCode.UP_NOTICE, function (sessionEvent) {
-                    publisher.log('=== Successfully connected and ready to publish messages. ===');
+                    orm.log('=== Successfully connected and ready to publish messages. ===');
                     publisher.publish();
                     //publisher.exit();
                 });
                 publisher.session.on(solace.SessionEventCode.CONNECT_FAILED_ERROR, function (sessionEvent) {
-                    publisher.log('Connection failed to the message router: ' + sessionEvent.infoStr +
+                    orm.log('Connection failed to the message router: ' + sessionEvent.infoStr +
                         ' - check correct parameter values and connectivity!');
                 });
                 publisher.session.on(solace.SessionEventCode.DISCONNECTED, function (sessionEvent) {
-                    publisher.log('Disconnected.');
+                    orm.log('Disconnected.');
                     if (publisher.session !== null) {
                         publisher.session.dispose();
                         publisher.session = null;
@@ -115,7 +132,7 @@ var soladmin = {
                 try {
                     publisher.session.connect();
                 } catch (error) {
-                    publisher.log(error.toString());
+                    orm.log(error.toString());
                 }
             };
         
@@ -127,15 +144,15 @@ var soladmin = {
                     message.setDestination(solace.SolclientFactory.createTopicDestination(publisher.topicName));
                     message.setBinaryAttachment(messageText);
                     message.setDeliveryMode(solace.MessageDeliveryModeType.DIRECT);
-                    publisher.log('Publishing message "' + messageText + '" to topic "' + publisher.topicName + '"...');
+                    orm.log('Publishing message "' + messageText + '" to topic "' + publisher.topicName + '"...');
                     try {
                         publisher.session.send(message);
-                        publisher.log('Message published.');
+                        orm.log('Message published.');
                     } catch (error) {
-                        publisher.log(error.toString());
+                        orm.log(error.toString());
                     }
                 } else {
-                    publisher.log('Cannot publish because not connected to Solace message router.');
+                    orm.log('Cannot publish because not connected to Solace message router.');
                 }
             };
         
@@ -148,15 +165,15 @@ var soladmin = {
         
             // Gracefully disconnects from Solace message router
             publisher.disconnect = function () {
-                publisher.log('Disconnecting from Solace message router...');
+                orm.log('Disconnecting from Solace message router...');
                 if (publisher.session !== null) {
                     try {
                         publisher.session.disconnect();
                     } catch (error) {
-                        publisher.log(error.toString());
+                        orm.log(error.toString());
                     }
                 } else {
-                    publisher.log('Not connected to Solace message router.');
+                    orm.log('Not connected to Solace message router.');
                 }
             };
 
