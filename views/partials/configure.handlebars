@@ -1,60 +1,12 @@
-<nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
-    <div class="container">
-        <a class="navbar-brand js-scroll-trigger" href="#page-top">SMURPH</a>
-        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive"
-            aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link js-scroll-trigger" href="/#about">About</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link js-scroll-trigger" href="/#getStarted">Get Started</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link js-scroll-trigger" href="/#configureRouter">Configure Router</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link js-scroll-trigger" href="/#contact">Contact</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
-
-<section id="success" class="bg-dark text-white">
+<section class="bg-dark text-white" id="configureRouter">
     <div class="container">
         <div class="row">
-            <div class="col-lg-8 mx-auto text-center">
-                <h2 class="section-heading"><h2>Congrats!</h2>
-                <hr class="my-4">
-                <p class="mb-5">You have successfully configured your Solace router. Please use the information for the publisher and subscriber below to begin communicating with your Raspberry Pi.</p>
-                {{#with data}}
-                <p class="mb-5">Subscriber Username: {{subscriber}}</p>
-                <p class="mb-5">Subscriber Password: {{subPassword}}</p>
-                <p class="mb-5">Publisher Username: {{publisher}}</p>
-                <p class="mb-5">Publisher Password: {{pubPassword}}</p>
-                {{/with}}
-            </div>
-        </div>
-    </div>
-</section>
-
-<section id="tryItOut" class="bg-dark text-white">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 mx-auto text-center">
-                <h2 class="section-heading"><h2>Try it out!</h2>
-                <hr class="my-4">
-                <p class="mb-5">Step 1: Setup the listener on your Raspberry Pi</p>
-                <p class="mb-5">Run TopicSubscriber.js</p>
+            <div class="col-md-6">
                 <br>
-                <p class="mb-5">Step 2: Setup the publish a message</p>
-                <p class="mb-5">Run TopicSubscriber.js</p>
+                <h2 class="mb-4">Set up your Solace Message Router</h2>
+                <h6 class="mb-4">Fill in the form below to quickly configure your Solace router</h6>
 
-                <form id="contact-form" method="post" action="/configure#tryItOut" role="form">
+                <form id="contact-form" method="post" action="/#configureRouter" role="form">
 
                     <div class="controls">
                         <div class="row">
@@ -104,10 +56,17 @@
                         </div>
                     </div>
                 </form>
-
+            </div>
+            <div class="col-md-6">
+                <br> 
+                <div id="apiResponseMessage"></div>
+                {{#with data}}
+                <p class="mb-5">Subscriber Username: {{subscriber}}</p>
+                <p class="mb-5">Subscriber Password: {{subPassword}}</p>
+                <p class="mb-5">Publisher Username: {{publisher}}</p>
+                <p class="mb-5">Publisher Password: {{pubPassword}}</p>
+                {{/with}}
             </div>
         </div>
     </div>
 </section>
-
-

@@ -1,4 +1,4 @@
-// Require express, body-parser and express-handlebars NPM packages
+// Require express, body-parser and express-handlebars
 var express = require("express");
 var bodyParser = require("body-parser");
 var handlebars = require("express-handlebars");
