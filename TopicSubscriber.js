@@ -19,6 +19,7 @@ var TopicSubscriber = function (solaceModule, topicName) {
 
     // main function
     subscriber.run = function (argv) {
+        console.log(argv)
         subscriber.connect(argv);
     };
 

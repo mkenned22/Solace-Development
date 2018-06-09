@@ -9,15 +9,10 @@ var orm = {
             method: 'POST',
             json: { 
                 "aclProfileName":app+"_"+desc+"_"+type+"_acl",
-                "clientConnectDefaultAction":"allow"
+                "clientConnectDefaultAction":"allow",
+                "subscribeTopicDefaultAction":"allow",
+                "publishTopicDefaultAction":"allow"
             }
-        }
-
-        if(type="pub"){
-            params.json.publishTopicDefaultAction = "allow";
-        }
-        else if(type="sub"){
-            params.json.subscribeTopicDefaultAction = "allow";
         }
 
         request(params,function(error,res,body){
@@ -36,15 +31,9 @@ var orm = {
                 "aclProfileName":app+"_"+desc+"_"+type+"_acl",
                 "clientProfileName":"default",
                 "enabled":true,
+                "password":type+'_password'
             }
         };
-
-        if(type="pub"){
-            params.json.password = "publish";
-        }
-        else if(type="sub"){
-            params.json.password = "subscribe";
-        }
 
         request(params,function(error,res,body){
             if(error){

@@ -1,5 +1,5 @@
 var express = require("express");
-var solace = require("../models/solace.js")
+var soladmin = require("../models/soladmin.js")
 var database = require("../models/database.js")
 
 var router = express.Router();
@@ -22,9 +22,9 @@ router.post("/", function(req, res){
         data:{
 
             "subscriber":app+"_"+desc+"_sub_cu",
-            "subPassword":"subscribe",
+            "subPassword":"sub_password",
             "publisher":app+"_"+desc+"_pub_cu",
-            "pubPassword":"publish"
+            "pubPassword":"pub_password"
         } 
     }
 
@@ -37,7 +37,7 @@ router.post("/", function(req, res){
         } 
     }
 
-    solace.configureMessageVpn(user,pass,vpn,app,desc,function(result){
+    soladmin.configureMessageVpn(user,pass,vpn,app,desc,function(result){
         if(result.body.meta.responseCode === 200){
             res.render("index",hbsObject);
             database.insertOne(vpn,app,desc,function(result){
@@ -49,6 +49,10 @@ router.post("/", function(req, res){
         }     
     });
 
+});
+
+router.post("/test", function(req, res){
+    soladmin.publishMessage()
 });
 
 module.exports = router;
